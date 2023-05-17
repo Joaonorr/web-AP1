@@ -1,0 +1,28 @@
+O problema de PROPS DRILLING ocorre quando queremos passar props em vários componentes para determinada tarefa,
+isso pode gerar problemas de legibilidade de código, dificulta refatorações e performance.
+
+Como solução, podemos utilizar o contexto para criar um estado global que pode ser acessado por todos os componentes,
+sem a necessidade de passar props para todos os componentes. Dessa forma, evitamos problemas de performance e facilitamos
+a manutenção do código.
+
+// Criando o contexto
+criarContexto MyContext
+
+// Componente "Avô" - fornecendo as props através do contexto
+função Avo:
+  informação = { mensagem: "Olá, mundo!" }
+  fornecerValor(MyContext, informação)
+  renderizarComponente(Pai)
+
+// Componente "Pai" - recebe as props através do contexto e repassa para o componente "Neto"
+função Pai:
+  renderizarComponente(Neto)
+
+// Componente "Neto" - recebe as props diretamente do contexto
+função Neto:
+  informação = receberValor(MyContext)
+  exibir(informação.mensagem)
+
+// Componente "App" - componente principal que renderiza o componente "Avô"
+função App:
+  renderizarComponente(Avo)
